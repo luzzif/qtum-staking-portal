@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    height: 100%;
+    flex-direction: column;
+}
+
+.quantity {
+    display: flex;
+    color: #ffffff;
+    font-size: 12vw;
+    margin-bottom: 16px;
+}
+
+.gained {
+    display: flex;
+    color: #fff;
+    font-size: 3vw;
+}
