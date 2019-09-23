@@ -2,7 +2,7 @@
     "name": "qtum-staking-portal",
     "description": "A small React portal to check a full node's staking-related basic info.",
     "author": "Federico Luzzi <fedeluzzi00@gmail.com>",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "private": true,
     "dependencies": {
         "@mondora/env": "^1.3.0",
