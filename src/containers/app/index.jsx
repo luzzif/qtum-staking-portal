@@ -1,7 +1,7 @@
 import React, { useEffect, memo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getBalance } from "../../actions/balances";
-import { INITIAL_AMOUNT, ADDRESSES } from "../../env";
+import { INITIAL_AMOUNT, ADDRESSES, FIAT_CURRENCY } from "../../env";
 import Spinner from "react-md-spinner";
 import { getQtumFromSatoshis } from "../../utils/conversions";
 import { getPrice } from "../../actions/prices";
@@ -48,7 +48,7 @@ export const App = memo(() => {
     return (
         <div className="container">
             {loadings > 0 || !totalBalance || !gainedBalance || !gainedEuros ? (
-                <Spinner singleColor="#fff" />
+                <Spinner singleColor="#fff" size="52px" />
             ) : (
                 <>
                     <div className="quantity">
@@ -56,8 +56,8 @@ export const App = memo(() => {
                     </div>
                     <div className="gained">
                         <Counter number={gainedBalance} /> QTUM (
-                        {<Counter number={gainedEuros} />} EUR) gained from
-                        staking
+                        {<Counter number={gainedEuros} />} {FIAT_CURRENCY}){" "}
+                        gained from staking
                     </div>
                 </>
             )}
