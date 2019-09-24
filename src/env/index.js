@@ -18,10 +18,11 @@ export const INITIAL_AMOUNT = env("REACT_APP_INITIAL_AMOUNT", {
     required: true
 });
 
-export const COIN_API_ENDPOINT = env("REACT_APP_COIN_API_ENDPOINT", {
-    required: true
-});
+export const CRYPTO_COMPARE_API_ENDPOINT = env(
+    "REACT_APP_CRYPTO_COMPARE_API_ENDPOINT",
+    { required: true }
+);
 
-export const COIN_API_KEY = env("REACT_APP_COIN_API_KEY", {
+export const CRYPTO_COMPARE_API_KEY = env("REACT_APP_CRYPTO_COMPARE_API_KEY", {
     required: true
 });
