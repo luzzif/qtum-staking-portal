@@ -1,16 +1,17 @@
 import React, { useEffect, memo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getBalance } from "../../actions/balances";
+import { getAddressInfo } from "../../actions/address-info";
 import { INITIAL_AMOUNT, ADDRESSES, FIAT_CURRENCY } from "../../env";
 import Spinner from "react-md-spinner";
 import { getQtumFromSatoshis } from "../../utils/conversions";
 import { getPrice } from "../../actions/prices";
 import { Counter } from "../../components/counter";
+
 import "./styles.css";
 import "react-count-animation/dist/count.min.css";
 
 export const App = memo(() => {
-    const balances = useSelector(state => state.balances);
+    const addressInfo = useSelector(state => state.addressInfo);
     const loadings = useSelector(state => state.loadings.amount);
     const price = useSelector(state => state.prices);
     const dispatch = useDispatch();
@@ -18,26 +19,32 @@ export const App = memo(() => {
     const [totalBalance, setTotalBalance] = useState(0);
     const [gainedBalance, setGainedBalance] = useState(0);
     const [gainedEuros, setGainedEuros] = useState(0);
+    const [totalStakedBlocks, setTotalStakedBlocks] = useState(0);
 
     useEffect(() => {
         dispatch(getPrice());
         ADDRESSES.forEach(address => {
-            dispatch(getBalance(address));
+            dispatch(getAddressInfo(address));
         });
     }, [dispatch]);
 
     useEffect(() => {
-        if (balances) {
+        if (addressInfo) {
             const totalBalance = getQtumFromSatoshis(
-                Object.values(balances).reduce(
-                    (totalBalance, balance) => (totalBalance += balance),
+                Object.values(addressInfo).reduce(
+                    (totalBalance, info) => (totalBalance += info.balance),
                     0
                 )
             );
+            const totalStakedBlocks = Object.values(addressInfo).reduce(
+                (totalBlocks, info) => (totalBlocks += info.blocksMined),
+                0
+            );
             setTotalBalance(totalBalance);
             setGainedBalance(totalBalance - INITIAL_AMOUNT);
+            setTotalStakedBlocks(totalStakedBlocks);
         }
-    }, [balances]);
+    }, [addressInfo]);
 
     useEffect(() => {
         if (gainedBalance && price) {
@@ -48,19 +55,20 @@ export const App = memo(() => {
     return (
         <div className="container">
             {loadings > 0 || !totalBalance || !gainedBalance || !gainedEuros ? (
-                <Spinner singleColor="#fff" size="52px" />
+                <Spinner singleColor="#fff" size={52} />
             ) : (
-                <>
-                    <div className="quantity">
-                        <Counter number={totalBalance} /> QTUM
+                    <>
+                        <div className="quantity">
+                            <Counter number={totalBalance} /> QTUM
                     </div>
-                    <div className="gained">
-                        <Counter number={gainedBalance} /> QTUM (
+                        <div className="gained">
+                            <Counter number={gainedBalance} /> QTUM (
                         {<Counter number={gainedEuros} />} {FIAT_CURRENCY}){" "}
-                        gained from staking
+                            gained from staking
                     </div>
-                </>
-            )}
+                        <div className="stakedBlocks"><Counter number={totalStakedBlocks} decimals={0} /> staked blocks</div>
+                    </>
+                )}
         </div>
     );
 });

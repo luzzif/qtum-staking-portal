@@ -18,4 +18,11 @@
     display: flex;
     color: #fff;
     font-size: 3vw;
+    margin-bottom: 16px;
+}
+
+.stakedBlocks {
+    display: flex;
+    color: #fff;
+    font-size: 3vw;
 }

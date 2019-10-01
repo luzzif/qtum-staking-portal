@@ -1,15 +1,12 @@
-import {
-    GET_BALANCE_SUCCESS,
-    GET_BALANCE_FAILURE
-} from "../../actions/balances";
+import { GET_ADDRESS_INFO_SUCCESS, GET_ADDRESS_INFO_FAILURE } from "../../actions/address-info";
 
-export const balancesReducer = (state = {}, action) => {
+export const addressInfoReducer = (state = {}, action) => {
     switch (action.type) {
-        case GET_BALANCE_SUCCESS: {
-            const { address, balance } = action;
-            return { ...state, [address]: balance };
+        case GET_ADDRESS_INFO_SUCCESS: {
+            const { address, balance, blocksMined } = action;
+            return { ...state, [address]: { balance, blocksMined } };
         }
-        case GET_BALANCE_FAILURE: {
+        case GET_ADDRESS_INFO_FAILURE: {
             const { error } = action;
             return { ...state, error };
         }
