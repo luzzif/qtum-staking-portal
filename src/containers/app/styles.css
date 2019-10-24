@@ -9,7 +9,7 @@
 
 .quantity {
     display: flex;
-    color: #ffffff;
+    color: #fff;
     font-size: 12vw;
     margin-bottom: 16px;
 }
@@ -25,4 +25,12 @@
     display: flex;
     color: #fff;
     font-size: 3vw;
+    margin-bottom: 16px;
+}
+
+.expectBlockTime {
+    display: flex;
+    color: #fff;
+    font-size: 3vw;
+    margin-bottom: 16px;
 }
