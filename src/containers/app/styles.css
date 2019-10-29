@@ -34,3 +34,7 @@
     font-size: 3vw;
     margin-bottom: 16px;
 }
+
+.expectBlockTime > .counter {
+    margin-left: 8px;
+}
