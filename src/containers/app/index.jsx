@@ -81,11 +81,12 @@ export const App = memo(() => {
                     </div>
                     <div className="stakedBlocks">
                         <Counter number={totalStakedBlocks} decimals={0} />{" "}
-                        staked blocks
+                        validated blocks
                     </div>
                     <div className="expectBlockTime">
-                        <Counter number={expectedBlockTime} decimals={2} /> days
-                        of average block time
+                        Approximate time until next reward:
+                        <Counter number={expectedBlockTime} decimals={2} />
+                        days
                     </div>
                 </>
             )}
